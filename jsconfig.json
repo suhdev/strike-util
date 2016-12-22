@@ -1,12 +1,10 @@
 {
     "compilerOptions": {
-        "rootDir": "./src",
         "module": "es6",
         "target": "es6",
-        "outDir": "./es6"
+        "rootDir": "./test"
     },
     "exclude": [
-        "node_modules",
-        "jspm_packages"
+        "node_modules"
     ]
 }

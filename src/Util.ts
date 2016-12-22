@@ -123,15 +123,20 @@ const FORMATTERS = {
             }
             return v; 
         }else if (/^[0-9]+\.[0-9]+$/.test(extra)){
-            let len = parseFloat(extra); 
-            let v = +(((len - Math.floor(len))+"").substr(2));
-            let k = parseInt(item)
-            let t = item.toFixed(v); 
+            let kk = extra.split('.').map(v=>parseInt(v)); 
+            let ik = kk[0]; 
+            let fk = kk[1]; 
+            let v = parseInt(item)+"";
+            if (v.length < ik){
+                v = repeat("0",ik-v.length)+v;
+            }
+            let ff = parseFloat(item) - parseInt(item); 
+            return (v+"")+ff.toFixed(fk).substr(1); 
         }
         return item; 
     },
     "x":(item:number|any):string=>{
-        return item.toString(16); 
+        return "0x"+item.toString(16); 
     },
     "o":(item:any):string=>{
         if (typeof item === "object"){

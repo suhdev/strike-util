@@ -1,13 +1,13 @@
 {
   "name": "strike-util",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "main.js",
   "jsnext:main": "es6.js",
-  "types":"strike-util.d.ts",
-  "typings":"strike-util.d.ts",
+  "types": "strike-util.d.ts",
+  "typings": "strike-util.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers js:babel-register --require babel-polyfill --recursive"
   },
   "repository": {
     "type": "git",
@@ -16,7 +16,14 @@
   "author": "Suhail Abood <suhail.abood@gmail.com> (suhailabood.me)",
   "license": "ISC",
   "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-register": "^6.18.0",
+    "chai": "^3.5.0",
     "jspm": "^0.16.48",
+    "mocha": "^3.2.0",
     "tslint": "^4.1.1",
     "typescript": "^2.1.4"
   }
