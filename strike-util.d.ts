@@ -10,6 +10,8 @@ declare module 'strike-util'{
         [arg:string]:V
     }
 
+    export function curry<T>(params:any[],fn:(...args:any[])=>T):(...args:any[])=>T;
+
     /**
      * Repeats a given string specific number of times. 
      * @export

@@ -97,6 +97,14 @@ export function format(value: string, replacements: any): string {
     });
 }
 
+export function curry<T>(params:any[],fn:(...args:any[])=>T):(...args:any[])=>T{
+    let vv = params;  
+    return function(){
+        let kk = Array.prototype.slice.call(arguments,0); 
+        return fn.apply(null,[].concat(vv,kk)); 
+    }
+}
+
 /**
  * 
  */
