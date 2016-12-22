@@ -1,0 +1,23 @@
+{
+  "name": "strike-util",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "jsnext:main": "es6.js",
+  "types":"strike-util.d.ts",
+  "typings":"strike-util.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suhdev/strike-util.git"
+  },
+  "author": "Suhail Abood <suhail.abood@gmail.com> (suhailabood.me)",
+  "license": "ISC",
+  "devDependencies": {
+    "jspm": "^0.16.48",
+    "tslint": "^4.1.1",
+    "typescript": "^2.1.4"
+  }
+}
