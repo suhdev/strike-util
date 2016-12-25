@@ -1,6 +1,6 @@
 {
   "name": "strike-util",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A set of utility functions and classes to build web apps.",
   "main": "main.js",
   "jsnext:main": "es6.js",
