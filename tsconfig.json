@@ -2,8 +2,8 @@
     "compilerOptions": {
         "rootDir": "./src",
         "module": "commonjs",
-        "target": "es5",
-        "outDir": "./lib"
+        "target": "es6",
+        "outDir": "./es6"
     },
     "exclude": [
         "node_modules",

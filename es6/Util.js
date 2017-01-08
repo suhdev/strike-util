@@ -1,5 +1,5 @@
 "use strict";
-export function repeat(str, count) {
+function repeat(str, count) {
     let r = [];
     let i = 0;
     for (; i < count; i++) {
@@ -7,9 +7,11 @@ export function repeat(str, count) {
     }
     return r.join("");
 }
-export function identity(v) {
+exports.repeat = repeat;
+function identity(v) {
     return v;
 }
+exports.identity = identity;
 /**
  * Extracts the names of the parameters from functions
  *
@@ -17,7 +19,7 @@ export function identity(v) {
  * @param {Function} fn the function to extract its parameters' names.
  * @returns {Array<string>} array of parameters names
  */
-export function extractArgumentsFromFunction(fn) {
+function extractArgumentsFromFunction(fn) {
     let deps;
     fn.toString()
         .replace(/^function[\s]+?[\S]+?\((.*?)\)/, function (e, v, k) {
@@ -26,6 +28,7 @@ export function extractArgumentsFromFunction(fn) {
     });
     return deps;
 }
+exports.extractArgumentsFromFunction = extractArgumentsFromFunction;
 /**
  * Returns value at a given key with in an object literal.
  *
@@ -35,12 +38,13 @@ export function extractArgumentsFromFunction(fn) {
  * @param {string} p path separator, defaults to '.'
  * @returns {*} the value at the given key
  */
-export function getDataAt(object, path, p) {
+function getDataAt(object, path, p) {
     let o = object, key, temp, pathSep = p ? p : '.', list = path.split(pathSep);
     while ((key = list.shift()) && (temp = o[key]) && (o = temp))
         ;
     return temp;
 }
+exports.getDataAt = getDataAt;
 /**
  * (description)
  *
@@ -51,12 +55,13 @@ export function getDataAt(object, path, p) {
  * @param {string} p (description)
  * @returns {*} (description)
  */
-export function setDataAt(object, path, value, p) {
+function setDataAt(object, path, value, p) {
     let o = object, key, temp, pathSep = p ? p : '.', list = path.split(pathSep), lastKey = list.length > 0 ? list.splice(list.length - 1, 1)[0] : null;
     while ((key = list.shift()) && ((temp = o[key]) || (temp = o[key] = {})) && (o = temp))
         ;
     temp[lastKey] = value;
 }
+exports.setDataAt = setDataAt;
 /**
  * (description)
  *
@@ -65,7 +70,7 @@ export function setDataAt(object, path, value, p) {
  * @param {*} replacements (description)
  * @returns {string} (description)
  */
-export function format(value, replacements) {
+function format(value, replacements) {
     if (!replacements) {
         return value;
     }
@@ -73,19 +78,24 @@ export function format(value, replacements) {
         return (replacements && replacements[e]) || k;
     });
 }
-export function curry(params, fn) {
+exports.format = format;
+function curry(params, fn) {
     let vv = params;
     return function () {
         let kk = Array.prototype.slice.call(arguments, 0);
         return fn.apply(null, [].concat(vv, kk));
     };
 }
+exports.curry = curry;
 /**
  *
  */
 const FORMATTERS = {
     "typeof": (item) => {
         return typeof item;
+    },
+    "skip": (item) => {
+        return "";
     },
     "d": (item, extra) => {
         if (extra && extra.charAt(0) === ".") {
@@ -134,8 +144,8 @@ const FORMATTERS = {
  * @export
  * @returns
  */
-export function createFormatter() {
-    let formats = ['[0-9]+?\.[0-9]+?d', '[0-9]+?d', '\.[0-9]+?d', 'd', 'x', 's', 'o', 'typeof'];
+function createFormatter() {
+    let formats = ['[0-9]+?\.[0-9]+?d', '[0-9]+?d', '\.[0-9]+?d', 'd', 'x', 's', 'o', 'typeof', 'skip'];
     let customFormats = {};
     function fmt(format, ...args) {
         let regex = new RegExp("%(" + formats.join("|") + ")");
@@ -165,6 +175,7 @@ export function createFormatter() {
         format: fmt
     };
 }
+exports.createFormatter = createFormatter;
 /**
  *
  *
@@ -173,12 +184,13 @@ export function createFormatter() {
  * @param {...any[]} args
  * @returns
  */
-export function printf(format, ...args) {
+function printf(format, ...args) {
     let final = args.reduce((prev, current, cIdx) => {
-        return prev.replace(/%([0-9]+?\.[0-9]+?d|[0-9]+?d|\.[0-9]+?d|d|x|s|o|typeof)/, (all, a) => {
+        return prev.replace(/%([0-9]+?\.[0-9]+?d|[0-9]+?d|\.[0-9]+?d|d|x|s|o|typeof|skip)/, (all, a) => {
             let len = a.length, f = a.charAt(len - 1);
             return (FORMATTERS[a] && FORMATTERS[a](current)) || (FORMATTERS[f] && FORMATTERS[f](current, a.substr(0, len - 1)));
         });
     }, format);
     return final;
 }
+exports.printf = printf;
